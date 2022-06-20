@@ -17,5 +17,5 @@ for i in range(5):  # this is a for loop where i = 0 until i < 5
         print('is greater than 3')
     else:
         print(i)
-    print('done with i', i)
+    print('done with i=', i)
 print('All done')
