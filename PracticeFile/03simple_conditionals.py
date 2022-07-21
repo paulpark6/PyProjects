@@ -17,8 +17,9 @@ print("all done");
 try:
   f = open("C:/Users/03pau/Desktop/testfile.txt")
   try:
-    print("reading file")
+    print("writing file")
     f.write("hello world")
+    print("writing succeded")
   except:
     print("Something went wrong when writing to the file")
   finally:
