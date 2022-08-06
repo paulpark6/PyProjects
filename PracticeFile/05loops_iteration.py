@@ -24,9 +24,12 @@ friends = ['Joseph', 'Glenn', 'Sally']
 for friend in friends:
     print(friend)
 
-#"is" and "is not" operators
+#"is" and "is not" operators "is" and "is not" will consider both type and equality of variable
 print("helo" is not "bye"); # will print true
 print("helo" is "bye"); # will print false
+print(0 == 0.0) # this is true
+print(0 is 0.0) # this is false
+
 # finding the smallest value
 min = None # none is a special type for saying nothing
 data = [5,2,8,14,87,21,1,2,400]
