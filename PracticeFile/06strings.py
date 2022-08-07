@@ -49,12 +49,24 @@ low_name = name.lower()
 hi_name = name.upper()
 print(name, low_name, hi_name)
 
+
 # search online for string methods
 pos = name.find('Pa') # find the first occurance of Pa
 new_name = name.replace('Paul', 'Junwon')
 print(name) # name is unchanged
 print(new_name)
+
 white_space = '    Good Day Fm Days   '
-print(white_space.lstrip())
-print(white_space.rstrip())
-print(white_space.strip())
+print(white_space.lstrip()) # removes left white spaces
+print(white_space.rstrip()) # removes right white spaces
+print(white_space.strip()) # removes start and end white spaces
+
+# .startswith('______')
+print(name.startswith('Paul'))
+
+email = "03paulpark@gmail.com Sat Jan 5 09:13:16 2003"
+pos_a = email.find('@')
+pos_space = email.find(' ', pos_a) # starting from pos_a find the next space
+domain = email[pos_a + 1 : pos_space]
+print(domain)
+
