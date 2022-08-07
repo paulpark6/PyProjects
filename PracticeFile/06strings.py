@@ -1,5 +1,8 @@
 # strings data type
 
+from string import whitespace
+
+
 str = "string gone"
 char_0 = str[0]
 print(str)
@@ -49,4 +52,9 @@ print(name, low_name, hi_name)
 # search online for string methods
 pos = name.find('Pa') # find the first occurance of Pa
 new_name = name.replace('Paul', 'Junwon')
+print(name) # name is unchanged
 print(new_name)
+white_space = '    Good Day Fm Days   '
+print(white_space.lstrip())
+print(white_space.rstrip())
+print(white_space.strip())
