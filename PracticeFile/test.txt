@@ -1,0 +1,4 @@
+hello world Paul
+my name is paul park
+and I am here to show u how to read in files
+will only write lines with paul in there
