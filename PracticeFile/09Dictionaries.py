@@ -46,4 +46,13 @@ new_shibal = {'Shibal': 100} # create new dictionary with keys and values
 names_dict2.update(new_shibal) # use update
 print(names_dict2)
 
-
+## count_words(text) given the text it returns a dictionary of all the words and the count for each word 
+def count_words(text):
+    words = dict()
+    for word in text.split():
+        words[word] = words.get(word, 0) + 1
+    return words
+data = open("C:\GitHub-Projects\PyProjects\PracticeFile\\test.txt")
+print('\n\ncounting words\n\n')
+word_dictionary = count_words(data.read())
+print(word_dictionary)
