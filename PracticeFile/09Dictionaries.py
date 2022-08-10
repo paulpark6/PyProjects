@@ -70,5 +70,6 @@ print(word_dictionary.keys())
 # getting values of each key, same order as the key
 print(word_dictionary.values())
 
+# another way to print key and values
 for key,value in word_dictionary.items():
     print(key, value)
