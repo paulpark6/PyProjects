@@ -15,6 +15,24 @@ assert(y == 'world')
 d = dict()
 d['one'] = 1
 d['two'] = 2
-print(d.items())
+# d.items() is like list of tuples
 for (k,v) in d.items():
     print(k,v)
+
+assert((0,1,2) < (5,-1,2)) # only checks first element in this case
+assert((0,1,2) > (0,-1,2)) # checks first and second
+
+d = dict()
+d = {'b':1, 'a' :100, 'c':22}
+print(d)
+sorted_d = sorted(d.items())
+print(sorted_d)
+
+# creates a temp list
+temp = list()
+for (k,v) in d.items(): # changes value and keys and store to temp list as list of tuples
+    temp.append((v, k))
+print(temp)
+
+temp = sorted(temp, reverse = True) # sorted decend
+print(temp)
