@@ -1,0 +1,1 @@
+lo world hi'.find('hello')
