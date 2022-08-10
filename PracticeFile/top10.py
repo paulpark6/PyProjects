@@ -13,11 +13,14 @@ for line in data:
         word_bank[word] = word_bank.get(word, 0) + 1
 
 amount = list()
-for key, val in word_bank.items():
-    tuple = (val, key)
-    amount.append(tuple)
+#for key, val in word_bank.items():
+#    tuple = (val, key)
+#    amount.append(tuple)
 
-amount = sorted(amount, reverse = True)
+#amount = sorted(amount, reverse = True)
+
+# same thing as above but more simpler
+amount = sorted([(v,k) for  k,v in word_bank.items()], reverse = True)
 
 for val, key in amount[:10]:
     print(key, val)
