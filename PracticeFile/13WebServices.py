@@ -32,3 +32,5 @@ data = '''{
 info = json.loads(data)
 print('Name:', info["name"]) # it is a dictionary
 print('Hide:', info["email"]["hide"])
+
+# review this section...
