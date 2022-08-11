@@ -48,5 +48,5 @@ print('\n\nreading webpages\n')
 import urllib.request, urllib.parse, urllib.error
 fhand = urllib.request.urlopen('http://www.dr-chuck.com/page1.html')
 for line in fhand:
-    print(line.decode().strip())
+    print(line.decode().strip()) # .strip() will return a string that removes both leading and trailing [char]
 

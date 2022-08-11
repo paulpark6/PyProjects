@@ -1,1 +1,1 @@
-lo world hi'.find('hello')
+int(tag.get('href'))
