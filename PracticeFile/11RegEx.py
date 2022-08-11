@@ -17,3 +17,5 @@ y = re.findall('[0-9]+', x) # find all 0~9 digit or above
 print(y)
 y = re.findall('[AEFK]+',x) # find all upper case A E F K
 print(y)
+
+# need to relearn!
