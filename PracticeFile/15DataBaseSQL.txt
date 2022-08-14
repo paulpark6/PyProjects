@@ -1,0 +1,104 @@
+### SQL command to creat table
+ CREATE TABLE table_name { 
+   "name"   data_type ,
+   "email"  data_type
+ }
+
+
+### SQL command to insert to table
+ INSERT INTO table_name (name, email) VALUES ('Kristin', 'kf@gmail.com')
+
+### SQL command to delete data
+ DELETE FROM table_name; <- will delete all rows
+ DELETE FROM table_name WHERE email = 'ted@gmail.com';  # <- this deletes all rows with email = 'ted@gmail.com'
+
+### SQL Update
+ update table_name where email is 'csev@gmail.com', change the name to be 'Charles'
+ UPDATE talbe_name SET name = 'Charles' WHERE email = 'csev@gmail.com'
+
+
+### SQL SELECT
+
+# Selecting all data from table_name
+ SELECT * FROM table_name
+
+# Selecting specific data
+ SELECT * FROM table_name WHERE email = 'csev@gmail.com'
+
+### SQL Order operators
+ SELECT * FROM table_name ORDER BY email
+ SELECT * FROM table_name ORDER BY name DESC
+ SELECT * FROM table_name ORDER BY name ASC
+
+
+### DEALING WITH MULTIPLE 
+
+# Never put same string data in twice, user relationship
+
+
+### Creating Artist Table
+# is -> primary key that will auto increment and is not allowed to be null also unique
+CREATE TABLE "Artist" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+"name" TEXT)
+
+### Table with foreign key for Album
+# artist_id -> is the foreign key that takes INTEGER values
+
+CREATE TABLE "Album" (
+"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+artist_id INTEGER,
+"title" TEXT
+)
+
+### Table with foregin key for Genre
+CREATE TABLE "Genre" (
+"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+"name" TEXT
+)
+
+### Table with two foreign key for Track
+CREATE TABLE "Track" (
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+title TEXT,
+album_id INTEGER,
+genre_id INTEGER,
+len INTEGER,
+rating INTEGER,
+count INTEGER
+)
+
+
+### inserting data to Artist
+# Artist has auto increment id
+INSERT INTO Artist (name) VALUES ("Led Zepplin")
+INSERT INTO Artist (name) VALUES ("AC/DC")
+
+### inserting data to Genre
+INSERT INTO Genre (name) VALUES ("Rock")
+INSERT INTO Genre (name) VALUES ("Metal")
+
+### inserting into Album with foreign value for artist_id
+INSERT INTO Album (title, artist_id) VALUES ('Who Made Who', 2)
+INSERT INTO Album (title, artist_id) VALUES ('IV',1)
+
+### inserting to Track with multiple foreign keys
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) VALUES ('Black Dog', 5, 297, 0, 2, 1)
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) VALUES ('Stairway', 5, 482, 0, 2, 1)
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) VALUES ('About to Rock', 5, 313, 0, 1, 2)
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) VALUES ('Who Made Who', 5, 207, 0, 1, 2)
+
+
+### Relational Power and the Join operation in SQL
+### Join operation links across several tables as part of a select operation
+# From album title and Artist Name we pull the data. Album will join the Artist when there is a match with Album.Artist_id and Artist.id
+SELECT Album.title, Artist.name from Album JOIN Artist ON Album.Artist_id = Artist.id
+
+# this does not have on clause so it will join the two tables randomly for all combination
+SELECT Track.title, Track.genre_id, Genre.id, Genre.name FROM Track JOIN Genre
+# So do this instead
+#      what we want to see          the tables with data   how the tables are linked
+SELECT Track.title, Genre.name FROM Track JOIN Genre ON Track.genre_id = Genre.id
+
+# joining all the tables...
+SELECT Track.title, Artist.name, Album.title, Genre.name from Track join Genre join Album join Artist ON Track.genre_id = Genre.id AND Track.album_id = Album.id AND Album.artist_id = Artist.id
