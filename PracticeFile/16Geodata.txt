@@ -1,0 +1,18 @@
+### Retreving a Visualizing data
+
+[data source] -> gather -> [Raw] -> [Clean/Proccess] -> [visualize/Analyze]
+
+
+
+Page Rank -> It determines which pages are most highly connected.
+https://youtu.be/6-w_qIUwaxU
+
+Web Crawling -> browses web automated manner and create copy of the visited pages for later
+
+Index Building -> page rank algorithm is used (Which page has the most best links).
+
+
+
+Mailing lists
+
+https://youtu.be/RYdW660KkaQ
