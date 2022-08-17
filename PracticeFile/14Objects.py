@@ -1,5 +1,13 @@
 # object oriented programming
 
+# class - a template (shape of a thing)
+# attribute - a variable within a class
+# method - a function within a class
+# object - a particular instance of a class 
+# constructor - code that runs whena an object is created (setting up the object)
+# inheritance - the ability to extend a class to make a new class
+
+
 # template, for Animal Class
 class Animal: 
     # the data in the Class Animal
