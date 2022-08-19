@@ -1,80 +1,87 @@
 
-from operator import truediv
+class Category:
+  def __init__(self, label):
+    self.label  = label
+    self.ledger = []
 
+  def get_balance(self):
+    c = 0
+    for item in self.ledger:
+      c += item['amount']
+    return c
+
+  def check_funds(self, amount):
+    return amount <= self.get_balance()
+
+  def deposit(self, amount, description=""):
+    self.ledger.append({"amount": amount, "description": description})
+
+  def withdraw(self, amount, description=""):
+    if self.check_funds(amount):
+      self.ledger.append({"amount": -amount, "description": description})
+      return True
+
+    return False
+
+  def transfer(self, amount, obj):
+    if self.withdraw(amount, "Transfer to " + obj.label):
+      obj.deposit(amount, "Transfer from " + self.label)
+      return True
+
+    return False
+
+  def __str__(self):
+    output = ""
+    output += self.label.center(30,"*") + "\n"
+
+    total = 0
+    for item in self.ledger:
+      total += item['amount']
+
+      output += item['description'].ljust(23, " ")[:23]
+      output += "{0:>7.2f}".format(item['amount'])
+      output += "\n"
+
+    output += "Total: " + "{0:.2f}".format(total)
+    return output
 
 def create_spend_chart(categories):
-    return None
+  output = "Percentage spent by category\n"
 
-class Category:
-    def __init__ (self, name):
-        self.name = name
-        self.ledger = list()
-    
-    def __str__(self):
-        title = f"{self.name:*^30}\n"
-        items = ""
-        total = 0
-        for item in self.ledger:
-            items += f"{item['description'][0:23]:23}" + f"{item['amount']:>7.2f}" + '\n'
-            total += item['amount']
-        output = title + items + "Total: " + str(total)
-        return output
-    
-    
-    def deposit (self, amount, des = ""):
-        """A deposit method that accepts an amount and description. 
-        If no description is given, it should default to an empty string. 
-        The method should append an object to the ledger list in the form of 
-        {"amount": amount, "description": description}."""
-        #self.ledger.append({"amount": amount, "description": des})
-        status = False
-        for item in self.ledger:
-            if item["description"] == des:
-                item["amount"] += amount
-                status = True
-        if (not status):
-            self.ledger.append({"amount": amount, "description": des})
+  # Retrieve total expense of each category
+  total      = 0
+  expenses   = []
+  labels     = []
+  len_labels = 0
 
-    def withdraw (self, amount, description = ""):
-        """Positive amount passed in should be stored in the ledger as a negative number. 
-        If there are not enough funds, nothing should be added to the ledger. 
-        This method should return True if the withdrawal took place, and False otherwise."""
-        if self.check_funds(amount):
-            self.ledger.append({"amount" : -amount, "description": description})
-            return True
-        return False
-    
-    def get_balance (self):
-        """A get_balance method that returns the current balance of the budget category 
-        based on the deposits and withdrawals that have occurred."""
-        total = 0
-        for stuff in self.ledger:
-            total += stuff["amount"]
-        return total
+  for item in categories:
+    expense    = sum([-x['amount'] for x in item.ledger if x['amount'] < 0])
+    total     += expense
 
-    def transfer(self, amount, category):
-        """Accepts an amount and another budget category as arguments. 
-        Adds a withdrawal with the amount and the description "Transfer to [Destination Budget Category]". 
-        The method should then add a deposit to the other budget category with the amount and the description 
-        "Transfer from [Source Budget Category]". 
-        If there are not enough funds, nothing should be added to either ledgers. 
-        This method should return True if the transfer took place, and False otherwise."""
-        if (self.check_funds(amount)):
-            self.withdraw(amount, "Transfer to " + category.name)
-            category.deposit(amount, "Transfer from " + self.name)
-            return True
-        return False
+    if len(item.label) > len_labels:
+      len_labels = len(item.label)
 
+    expenses.append(expense)
+    labels.append(item.label)
 
-    def check_funds (self, amount):
-        """Method that acc epts an amount as an argument. 
-        It returns False if the amount is greater than the balance of the budget category 
-        Returns True otherwise. 
-        This method should be used by both the withdraw method and transfer method."""
-        total = self.get_balance()
-        if (amount > total):
-            return False
-        elif amount < 0:
-            return False
-        return True
-    
+  # Convert to percent + pad labels
+  expenses = [(x/total)*100 for x in expenses]
+  labels   = [label.ljust(len_labels, " ") for label in labels]
+
+  # Format output
+  for c in range(100,-1,-10):
+    output += str(c).rjust(3, " ") + '|'
+    for x in expenses:
+      output += " o " if x >= c else "   "
+    output += " \n"
+
+  # Add each category name
+  output += "    " + "---"*len(labels) + "-\n"
+
+  for i in range(len_labels):
+    output += "    "
+    for label in labels:
+      output += " " + label[i] + " "
+    output += " \n"
+
+  return output.strip("\n")
